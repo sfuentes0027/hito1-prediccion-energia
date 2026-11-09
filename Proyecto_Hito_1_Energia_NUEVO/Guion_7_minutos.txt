@@ -1,0 +1,8 @@
+GUION DE PRESENTACIÓN (7 minutos aproximados)
+1. Introducción (30 s): presentamos el caso de energía, para anticipar consumo y apoyar decisiones.
+2. Problema (1 min): un encargado de mantenimiento necesita detectar consumos inesperados; la herramienta recomienda revisar, no apaga equipos.
+3. Datos (1 min): se emplean series horarias con kWh, temperatura, humedad y jornada. Para demostrar el código usamos tres series sintéticas y validamos faltantes, duplicados y orden temporal.
+4. Modelo (1 min 15 s): Random Forest predice la hora siguiente. Evaluamos con partición cronológica y comparamos con persistencia usando MAE y RMSE; menor error es mejor.
+5. Integración (1 min 15 s): Python produce JSON; el LLM interpreta, n8n distribuye por Gmail y Telegram. Se requiere configurar credenciales y validar el JSON.
+6. Pruebas (1 min): mostramos los tres JSON y resultados de error del modelo. Estas son pruebas locales, no envíos reales.
+7. Cierre (1 min): el valor es anticipar inspecciones. Para operación real faltan medidores, validación de umbrales, integración y evidencia de notificaciones.

@@ -1,0 +1,150 @@
+{
+  "name": "Hito 1 - Predicción de consumo energético",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "manual",
+      "name": "Iniciar prueba",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        200,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://HOST_DEL_SCRIPT:8000/predict",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\"archivo\":\"escenario_1_normal.csv\"}",
+        "options": {}
+      },
+      "id": "python",
+      "name": "Python - predicción y métricas",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        420,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/chat/completions",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer CONFIGURAR_API_KEY"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\"model\":\"gpt-4o-mini\",\"response_format\":{\"type\":\"json_object\"},\"messages\":[{\"role\":\"system\",\"content\":\"Eres un asistente de eficiencia energética. Devuelve JSON con resumen, hallazgos, acciones_recomendadas, validacion_humana y limitacion. No inventes datos.\"},{\"role\":\"user\",\"content\":JSON.stringify($json)}]}",
+        "options": {}
+      },
+      "id": "llm",
+      "name": "LLM - interpretar resultado",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        660,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "sendTo": "DESTINATARIO_CONFIGURAR",
+        "subject": "Reporte automático de consumo energético",
+        "emailType": "text",
+        "message": "={{ JSON.stringify($json) }}",
+        "options": {}
+      },
+      "id": "gmail",
+      "name": "Gmail - enviar reporte",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        900,
+        220
+      ]
+    },
+    {
+      "parameters": {
+        "chatId": "CHAT_ID_CONFIGURAR",
+        "text": "={{ JSON.stringify($json) }}",
+        "additionalFields": {}
+      },
+      "id": "telegram",
+      "name": "Telegram - enviar alerta",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        900,
+        390
+      ]
+    }
+  ],
+  "connections": {
+    "Iniciar prueba": {
+      "main": [
+        [
+          {
+            "node": "Python - predicción y métricas",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Python - predicción y métricas": {
+      "main": [
+        [
+          {
+            "node": "LLM - interpretar resultado",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "LLM - interpretar resultado": {
+      "main": [
+        [
+          {
+            "node": "Gmail - enviar reporte",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Telegram - enviar alerta",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "1",
+  "meta": {
+    "templateCredsSetupCompleted": false
+  },
+  "tags": [
+    {
+      "name": "Hito1"
+    }
+  ]
+}

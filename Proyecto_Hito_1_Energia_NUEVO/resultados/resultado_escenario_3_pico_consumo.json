@@ -1,0 +1,18 @@
+{
+  "caso": "escenario_3_pico_consumo",
+  "estado": "ALERTA",
+  "consumo_promedio_predicho_kwh": 25.26,
+  "percentil_95_predicho_kwh": 36.86,
+  "consumo_promedio_historico_kwh": 25.26,
+  "variacion_porcentual": 0.01,
+  "metricas": {
+    "MAE_random_forest": 2.419,
+    "RMSE_random_forest": 6.53,
+    "MAE_baseline_persistencia": 2.886,
+    "RMSE_baseline_persistencia": 5.253,
+    "n_train": 652,
+    "n_test": 163
+  },
+  "recomendacion": "Revisar equipos de alto consumo, horarios de operación y posibles cargas simultáneas. Confirmar la lectura del medidor antes de tomar acciones.",
+  "nota": "Datos de demostración sintéticos; no usar como medición real."
+}

@@ -1,0 +1,11 @@
+HITO 1 - CHECKLIST
+[OK] Informe PDF (máximo 6 páginas; revisar conteo)
+[OK] Presentación PowerPoint de 7 minutos y guion
+[OK] Python comentado, limpieza, modelo y baseline
+[OK] Datos de demostración y tres ejecuciones locales
+[OK] Prompt LLM y estructura JSON
+[OK] API FastAPI y plantilla n8n
+[PENDIENTE DE CONFIGURAR] Conectar credenciales Gmail, Telegram y LLM
+[PENDIENTE DE CONFIGURAR] Ejecutar tres veces el flujo n8n y guardar capturas de envíos reales
+[PENDIENTE] Registro histórico persistente en servicio externo
+[PENDIENTE] Completar integrantes y revisar instrucciones del docente

@@ -1,0 +1,59 @@
+{
+  "nota": "Tres ejecuciones locales del modelo con datos sintéticos; NO evidencian correos, mensajes ni LLM reales.",
+  "pruebas": [
+    {
+      "caso": "escenario_1_normal",
+      "estado": "ALERTA",
+      "consumo_promedio_predicho_kwh": 23.08,
+      "percentil_95_predicho_kwh": 33.38,
+      "consumo_promedio_historico_kwh": 22.91,
+      "variacion_porcentual": 0.76,
+      "metricas": {
+        "MAE_random_forest": 1.269,
+        "RMSE_random_forest": 1.545,
+        "MAE_baseline_persistencia": 2.177,
+        "RMSE_baseline_persistencia": 3.352,
+        "n_train": 652,
+        "n_test": 163
+      },
+      "recomendacion": "Revisar equipos de alto consumo, horarios de operación y posibles cargas simultáneas. Confirmar la lectura del medidor antes de tomar acciones.",
+      "nota": "Datos de demostración sintéticos; no usar como medición real."
+    },
+    {
+      "caso": "escenario_2_alta_demanda",
+      "estado": "ALERTA",
+      "consumo_promedio_predicho_kwh": 29.1,
+      "percentil_95_predicho_kwh": 43.4,
+      "consumo_promedio_historico_kwh": 28.88,
+      "variacion_porcentual": 0.77,
+      "metricas": {
+        "MAE_random_forest": 1.228,
+        "RMSE_random_forest": 1.52,
+        "MAE_baseline_persistencia": 2.723,
+        "RMSE_baseline_persistencia": 4.36,
+        "n_train": 652,
+        "n_test": 163
+      },
+      "recomendacion": "Revisar equipos de alto consumo, horarios de operación y posibles cargas simultáneas. Confirmar la lectura del medidor antes de tomar acciones.",
+      "nota": "Datos de demostración sintéticos; no usar como medición real."
+    },
+    {
+      "caso": "escenario_3_pico_consumo",
+      "estado": "ALERTA",
+      "consumo_promedio_predicho_kwh": 25.26,
+      "percentil_95_predicho_kwh": 36.86,
+      "consumo_promedio_historico_kwh": 25.26,
+      "variacion_porcentual": 0.01,
+      "metricas": {
+        "MAE_random_forest": 2.419,
+        "RMSE_random_forest": 6.53,
+        "MAE_baseline_persistencia": 2.886,
+        "RMSE_baseline_persistencia": 5.253,
+        "n_train": 652,
+        "n_test": 163
+      },
+      "recomendacion": "Revisar equipos de alto consumo, horarios de operación y posibles cargas simultáneas. Confirmar la lectura del medidor antes de tomar acciones.",
+      "nota": "Datos de demostración sintéticos; no usar como medición real."
+    }
+  ]
+}
