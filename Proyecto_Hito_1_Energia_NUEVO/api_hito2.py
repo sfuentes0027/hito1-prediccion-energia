@@ -7,7 +7,6 @@ from pydantic import BaseModel
 from pathlib import Path
 import tempfile,os
 from pipeline_energia import ejecutar
-from modelos.serie_gru import evaluar
 ROOT=Path(__file__).resolve().parent
 app=FastAPI(title='Sistema integrado Hito 2 Energia')
 class Solicitud(BaseModel):
@@ -24,7 +23,15 @@ def health():return {'status':'ok','version':'hito2'}
 @app.post('/predict')
 def predict(s:Solicitud):return ejecutar(ruta_segura(s.archivo))
 @app.post('/series/compare')
-def compare(s:Solicitud):return evaluar(ruta_segura(s.archivo))
+def compare(s: Solicitud):
+    try:
+        from modelos.serie_gru import evaluar
+        return evaluar(ruta_segura(s.archivo))
+    except Exception as e:
+        raise HTTPException(
+            status_code=503,
+            detail=f"No se pudo ejecutar la comparación: {str(e)}"
+        )
 @app.post('/nlp/classify')
 def nlp(s:Texto):
  try:
