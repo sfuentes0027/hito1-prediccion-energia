@@ -4,3 +4,5 @@ python-multipart
 numpy
 pandas
 scikit-learn
+opencv-python-headless
+Pillow
