@@ -31,3 +31,20 @@ def predict(s: Solicitud):
         )
 
     return ejecutar(ruta)
+
+# HITO 2 - Análisis de imágenes
+@app.post("/analyze-image")
+def analyze_image():
+    return {
+        "estado": "pendiente",
+        "mensaje": "Endpoint creado. Falta integrar el modelo de imágenes."
+    }
+
+
+# HITO 2 - Análisis de documentos
+@app.post("/analyze-document")
+def analyze_document():
+    return {
+        "estado": "pendiente",
+        "mensaje": "Endpoint creado. Falta integrar el modelo de documentos."
+    }
